@@ -1,3 +1,2 @@
 # Gradebook
-
-The Gradebook project is an electronic markbook for accounting student performance.
+The Gradebook project is an application for accounting student performance.
