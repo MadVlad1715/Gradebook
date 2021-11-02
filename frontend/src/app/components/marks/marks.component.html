@@ -1,0 +1,85 @@
+<div *ngIf="!loading" class="marks-content-wrapper">
+
+  <h2 class="accent">{{subject.name}}</h2>
+  <h3 *ngIf="subject.teacher">
+    Викладач: <span class="accent">{{subject.teacher}}</span>
+  </h3>
+  <h3>
+    Група: <span class="accent">{{subject.group.name}}</span>
+    <span *ngIf="subject.group.classroomTeacher">, Класний керівник: <span
+      class="accent">{{subject.group.classroomTeacher}}</span></span>
+  </h3>
+
+  <p class="no-students" *ngIf="students.length === 0">На даний момент група не має студентів</p>
+
+  <div *ngIf="students.length > 0" class="table-content-wrapper">
+    <div class="table-content">
+      <div class="table-controls">
+        <mat-form-field appearance="standard">
+          <mat-label>Фільтр</mat-label>
+          <input matInput [(ngModel)]="filterValue" (keydown.escape)="filterValue=''" type="text" maxlength="41" #filter>
+          <mat-icon class="search-icon" matPrefix svgIcon="search"></mat-icon>
+          <button *ngIf="filterValue" mat-icon-button matSuffix aria-label="Clear" (click)="filterValue=''">
+            <mat-icon class="clear-icon" svgIcon="clear"></mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field anotherDateFormat appearance="standard">
+          <mat-label>Діапазон дат</mat-label>
+          <mat-date-range-input [rangePicker]="dp1">
+            <input matStartDate [(ngModel)]="startDate" (dateInput)="fixBorders();" (keydown.escape)="startDate=endDate=undefined; fixBorders();" placeholder="Початок" #startDateInput>
+            <input matEndDate [(ngModel)]="endDate" (dateInput)="fixBorders();" (keydown.escape)="startDate=endDate=undefined; fixBorders();" placeholder="Кінець" #endDateInput>
+          </mat-date-range-input>
+          <mat-datepicker-toggle matPrefix [for]="dp1"></mat-datepicker-toggle>
+          <button *ngIf="startDateInput.value || endDateInput.value" mat-icon-button matSuffix aria-label="Clear" (click)="startDate=endDate=undefined; fixBorders();">
+            <mat-icon class="clear-icon" svgIcon="clear"></mat-icon>
+          </button>
+          <mat-date-range-picker (closed)="onDatepickerClosed()" #dp1></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div class="table-container-wrapper">
+        <div class="table-container">
+          <table>
+            <thead>
+            <tr>
+              <th class="name-column"></th>
+              <th class="column" *ngFor="let column of filteredColumns" (click)="auth.isTeacher && dp1.open()">
+                <input readonly [ngClass]="auth.isTeacher ? 'pointer' : ''" [matDatepicker]="dp1" [value]="columnMoment(column)" (dateChange)="onDateChange(column, $event)" (mousedown)="onMouseDown($event)">
+                <mat-datepicker #dp1>
+                  <mat-datepicker-actions>
+                    <button mat-stroked-button matDatepickerCancel>Назад</button>
+                    <button mat-stroked-button color="warn" (click)="dp1.close(); deleteColumn(column)">Видалити</button>
+                    <button mat-stroked-button color="primary" matDatepickerApply>Змінити</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </th>
+              <th class="static-header" *ngIf="auth.isTeacher">
+                <button class="add-column-button" mat-icon-button (click)="auth.isTeacher && dp2.open()">
+                  <mat-icon svgIcon="add"></mat-icon>
+                </button>
+                <input readonly [matDatepicker]="dp2" [value]="today()" (dateChange)="addColumn($event)">
+                <mat-datepicker (closed)="onDatepickerClosed()" #dp2>
+                  <mat-datepicker-actions>
+                    <button mat-stroked-button matDatepickerCancel>Назад</button>
+                    <button mat-stroked-button color="primary" matDatepickerApply>Додати</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of filteredStudents">
+              <td class="student-name">{{student.name}}</td>
+              <td class="mark" *ngFor="let column of filteredColumns">
+                <input maxlength="10" type="text" readonly [value]="getMark(column.id, student.id)"
+                       (dblclick)="onDblClick($event)" (mousedown)="onMouseDown($event)" (blur)="inp.readOnly = true"
+                       (input)="onInput(column.id, student.id, $event)" spellcheck="false" #inp>
+              </td>
+              <td class="static-cell" *ngIf="auth.isTeacher"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.wrapper {
+  flex-basis: 1100px;
+}
+
+.mat-column-name, .mat-column-classroomTeacher, .mat-column-creationTime {
+  padding-right: 16px;
+  white-space: nowrap;
+}
+
+.mat-column-actions {
+  white-space: nowrap;
+  flex: 0 0 100px;
+  width: 100px;
+}

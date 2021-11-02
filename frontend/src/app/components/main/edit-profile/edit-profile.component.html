@@ -1,0 +1,63 @@
+<div class="dialog">
+
+  <div class="header">
+    <h2 mat-dialog-title>Редагування облікового запису</h2>
+    <mat-error *ngIf="error">{{errorText}}</mat-error>
+  </div>
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="standard">
+        <input matInput type="text" placeholder="Логін" formControlName="login" required minlength="5" maxlength="20">
+        <mat-icon matSuffix svgIcon="login"></mat-icon>
+        <mat-error *ngIf="form.controls['login'].errors?.required">Дане поле є обов'язковим</mat-error>
+        <mat-error *ngIf="form.controls['login'].errors?.minlength">Логін занадто короткий</mat-error>
+        <mat-error *ngIf="form.controls['login'].errors?.studentAlreadyExists">Студент з таким логіном вже існує</mat-error>
+        <mat-error *ngIf="!form.controls['login'].errors?.minlength && form.controls['login'].errors?.forbiddenLogin">Недопустимий логін</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <input matInput type="text" placeholder="Прізвище" formControlName="lastName" required minlength="3" maxlength="20">
+        <mat-icon matSuffix svgIcon="user"></mat-icon>
+        <mat-error *ngIf="form.controls['lastName'].errors?.required">Дане поле є обов'язковим</mat-error>
+        <mat-error *ngIf="form.controls['lastName'].errors?.minlength">Прізвище занадто коротке</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <input matInput type="text" placeholder="Ім'я" formControlName="firstName" required minlength="3" maxlength="20">
+        <mat-icon matSuffix svgIcon="user"></mat-icon>
+        <mat-error *ngIf="form.controls['firstName'].errors?.required">Дане поле є обов'язковим</mat-error>
+        <mat-error *ngIf="form.controls['firstName'].errors?.minlength">Ім'я занадто коротке</mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="auth.isTeacher" appearance="standard">
+        <input matInput type="text" placeholder="По батькові" formControlName="patronymic" required minlength="3" maxlength="20">
+        <mat-icon matSuffix svgIcon="user"></mat-icon>
+        <mat-error *ngIf="form.controls['patronymic'].errors?.required">Дане поле є обов'язковим</mat-error>
+        <mat-error *ngIf="form.controls['patronymic'].errors?.minlength">Ім'я по батькові занадто коротке</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <input matInput autocomplete="new-password" type="password" placeholder="Пароль (якщо бажаєте змінити)" formControlName="password" minlength="5" maxlength="50" #pass>
+        <mat-icon matSuffix svgIcon="password"></mat-icon>
+        <mat-error *ngIf="form.controls['password'].errors?.minlength">Пароль занадто короткий</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <input matInput autocomplete="new-password" type="password" placeholder="Повтор паролю" formControlName="passwordRepeat" required maxlength="50">
+        <mat-icon matSuffix svgIcon="password"></mat-icon>
+        <mat-error *ngIf="form.controls['passwordRepeat'].errors?.required">Дане поле є обов'язковим</mat-error>
+        <mat-error *ngIf="form.controls['passwordRepeat'].errors?.passwordMismatch">Паролі повинні співпадати</mat-error>
+      </mat-form-field>
+
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button [mat-dialog-close]="undefined" [disabled]="requesting">Назад</button>
+    <button mat-stroked-button color="primary" (click)="onSubmit()" [disabled]="form.invalid || requesting">Зберегти</button>
+  </mat-dialog-actions>
+
+  <mat-progress-bar class="progress" [ngStyle]="{visibility: requesting? 'visible' : 'hidden'}" mode="indeterminate"></mat-progress-bar>
+</div>

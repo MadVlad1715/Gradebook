@@ -1,0 +1,4 @@
+vendor/
+.*/
+*.sql
+!deploy.sql

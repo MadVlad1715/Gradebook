@@ -1,0 +1,138 @@
+@import '~@angular/material/theming';
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 199;
+  margin-bottom: 50px;
+  height: 50px;
+  background: mat-color(mat-palette($mat-indigo));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  font-weight: 500;
+
+  .logo {
+    white-space: nowrap;
+    margin: 0 10px;
+    font-size: 26px;
+    color: #F0F0F0;
+    font-style: italic;
+    cursor: default;
+    user-select: none;
+  }
+
+  nav {
+    height: 100%;
+    background: inherit;
+    //transition: opacity 0.25s ease;
+
+    &.transition {
+      transition: opacity 0.25s ease
+    }
+
+    ul {
+      display: flex;
+      height: 100%;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      color: inherit;
+
+      a {
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 10px;
+        align-items: center;
+        text-decoration: none;
+        color: #E7E7E7;
+        padding: 0 12px;
+        text-transform: uppercase;
+        font-size: 16px;
+        //border-width: 0 1px;
+        //border-color: #F0F0F0;
+        //border-style: solid;
+        height: 100%;
+        cursor: pointer;
+
+        &:hover {
+          color: white;
+
+          ::ng-deep mat-icon svg {
+            fill: white;
+          }
+        }
+      }
+
+      li:first-child a {
+        border-left-style: none;
+      }
+
+      li:last-child a {
+        border-right-style: none;
+      }
+    }
+
+    ::ng-deep svg {
+      fill: #E7E7E7;
+    }
+  }
+
+  ::ng-deep .menu-btn {
+    display: none;
+
+    svg {
+      fill: #E7E7E7;
+    }
+
+    &:hover svg {
+      fill: white;
+    }
+
+    .mat-button-ripple {
+      color: #E7E7E7;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .header {
+    nav {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      left: 0;
+      top: 50px;
+      width: 100%;
+      height: auto;
+
+      ul {
+        flex-direction: column;
+        align-items: center;
+
+        li {
+          width: 100%;
+        }
+
+        a {
+          padding: 15px 0;
+        }
+      }
+
+      &.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    .menu-btn {
+      display: inline-block;
+    }
+  }
+}
+
+.active {
+  background-color: #475CC6;
+}

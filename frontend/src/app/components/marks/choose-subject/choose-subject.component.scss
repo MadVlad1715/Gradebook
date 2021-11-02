@@ -1,0 +1,87 @@
+.choose-subject-wrapper {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 400px);
+  padding: 0 25px;
+  grid-gap: 25px;
+  justify-content: center;
+}
+
+.info {
+  p {
+    text-align: center;
+  }
+  .no-subjects {
+    font-size: 20px;
+  }
+  .group {
+    font-size: 30px;
+    line-height: 34px;
+    margin-bottom: 20px;
+  }
+
+  .teacher {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 25px;
+  }
+}
+
+mat-card {
+  width: 400px;
+  transition: 0.25s ease;
+  transition-property: transform, box-shadow;
+  cursor: pointer;
+}
+
+.subject {
+
+  mat-card-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-bottom: 10px;
+    justify-items: start;
+    align-items: start;
+    margin-top: -6px;
+
+
+    mat-card-title {
+      font-size: 24px;
+      line-height: 28px;
+      margin: 6px 0;
+      word-break: break-word;
+    }
+
+    .options {
+      margin-right: -8px;
+      justify-self: end;
+    }
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+.add-group {
+  mat-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    mat-card-title {
+      font-size: 22px;
+    }
+
+    mat-icon {
+      transform: scale(1.5);
+    }
+  }
+}
+
+.card-hover {
+  transform: translateY(-10px);
+}

@@ -1,0 +1,47 @@
+.auth-form {
+  max-width: 400px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 0;
+
+  mat-card-content {
+    padding: 16px 16px 0;
+  }
+
+  mat-card-header {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 15px;
+
+    mat-error {
+      font-size: 16px;
+    }
+  }
+
+  mat-card-title {
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+
+  mat-form-field {
+    display: block;
+    margin: 0 8px;
+  }
+
+  mat-icon {
+    user-select: none;
+  }
+
+  button {
+    margin-top: 15px;
+  }
+
+  mat-progress-bar {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+
+  mat-error {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,20 @@
+<div class="content-wrapper">
+  <div class="content">
+    <mat-card *ngIf="!loading">
+      <div class="header-wrapper">
+        <mat-icon mat-card-avatar svgIcon="user"></mat-icon>
+        <mat-card-header>
+          <mat-card-title>{{user.last_name + ' ' + user.first_name + (user.patronymic ? ' ' + user.patronymic : '')}} ({{user.login}})</mat-card-title>
+          <mat-card-subtitle>{{user.statusString}}</mat-card-subtitle>
+        </mat-card-header>
+        <button mat-icon-button color="primary" (click)="edit()">
+          <mat-icon svgIcon="edit"></mat-icon>
+        </button>
+      </div>
+      <mat-card-content>
+        <p *ngIf="user.isTeacher && user.classroom_teacher">Классний керівник груп{{user.classroom_teacher.length === 1 ? 'и' : ''}} {{user.classroom_teacher.join(', ')}}</p>
+        <p *ngIf="user.isStudent && user.group">Група {{user.group}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

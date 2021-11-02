@@ -1,0 +1,17 @@
+<div *ngIf="auth.isAdmin || auth.isTeacher">
+  <p class="no-groups" *ngIf="groups && !this.groups.length">На даний момент не зареєстровано жодної групи</p>
+  <div class="choose-groups-wrapper">
+    <mat-card *ngFor="let group of groups"
+              [appHover]="['mat-elevation-z16', 'card-hover']"
+              (click)="onClick(group)">
+      <mat-card-header>
+        <mat-card-title>{{group.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="group.classroomTeacher">Класний керівник: {{group.classroomTeacher}}</p>
+        <p>Кількість предметів: {{group.subjectsCount}}</p>
+        <p>Кількість студентів: {{group.studentsCount}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

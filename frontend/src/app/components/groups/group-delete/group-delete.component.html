@@ -1,0 +1,26 @@
+<div class="dialog">
+
+  <div class="header">
+    <h2 mat-dialog-title>Видалення групи</h2>
+    <mat-error *ngIf="error">Виникла помилка</mat-error>
+  </div>
+
+  <mat-dialog-content class="mat-typography">
+    <p>Ви впевнені, що хочете видалити группу <span class="accent">{{group.name}}</span>?</p>
+    <p *ngIf="group.studentsCount && group.subjectsCount" class="warning">
+      Також будуть видалені всі студенти (<span class="accent">{{group.studentsCount}}</span>) та предмети (<span class="accent">{{group.subjectsCount}}</span>), які належать до цієї групи без можливості відновлення
+    </p>
+    <p *ngIf="group.studentsCount && !group.subjectsCount" class="warning">
+      Також будуть видалені всі студенти (<span class="accent">{{group.studentsCount}}</span>), які належать до цієї групи без можливості відновлення
+    </p>
+    <p *ngIf="!group.subjectsCount && group.subjectsCount" class="warning">
+      Також будуть видалені всі предмети (<span class="accent">{{group.subjectsCount}}</span>), які належать до цієї групи без можливості відновлення
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button [mat-dialog-close]="undefined" [disabled]="requesting">Назад</button>
+    <button mat-stroked-button color="warn" (click)="onDeleteClick()" [disabled]="requesting">Видалити</button>
+  </mat-dialog-actions>
+
+  <mat-progress-bar class="progress" [ngStyle]="{visibility: requesting? 'visible' : 'hidden'}" mode="indeterminate"></mat-progress-bar>
+</div>

@@ -1,0 +1,48 @@
+<div class="header" (click)="$event.stopPropagation()" (mouseleave)="hideNav()">
+  <span class="logo">KEMK–Gradebook</span>
+
+  <nav (click)="hideNav()" *ngIf="showNavigation">
+    <ul>
+      <li>
+        <a routerLink="/main" routerLinkActive="active">
+          Головна
+          <mat-icon svgIcon="home"></mat-icon>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/marks" routerLinkActive="active">
+          Оцінки
+          <mat-icon svgIcon="book"></mat-icon>
+        </a>
+      </li>
+      <li *ngIf="auth.isTeacher || auth.isAdmin">
+        <a routerLink="/students" routerLinkActive="active">
+          Студенти
+          <mat-icon svgIcon="students"></mat-icon>
+        </a>
+      </li>
+      <li *ngIf="auth.isTeacher || auth.isAdmin">
+        <a routerLink="/groups" routerLinkActive="active">
+          Групи
+          <mat-icon svgIcon="groups"></mat-icon>
+        </a>
+      </li>
+      <li *ngIf="auth.isAdmin">
+        <a routerLink="/teachers" routerLinkActive="active">
+          Викладачі
+          <mat-icon svgIcon="teacher"></mat-icon>
+        </a>
+      </li>
+      <li>
+        <a (click)="showLogoutDialog()">
+          Вихід
+          <mat-icon svgIcon="logout"></mat-icon>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <button *ngIf="showNavigation" class="menu-btn" mat-icon-button (click)="menuBtnClick()">
+    <mat-icon svgIcon="menu"></mat-icon>
+  </button>
+</div>

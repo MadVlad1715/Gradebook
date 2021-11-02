@@ -1,0 +1,196 @@
+.marks-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px auto;
+  min-width: 450px;
+  padding: 0 25px;
+
+  h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .no-students {
+    margin-top: 50px;
+    font-size: 18px;
+  }
+
+  .accent {
+    font-weight: 500;
+  }
+
+  .table-content-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .table-content {
+      display: flex;
+      flex-direction: column;
+      min-width: 400px;
+
+      .table-container-wrapper {
+        display: flex;
+        justify-content: center;
+
+        .table-container {
+          overflow: auto;
+          max-height: 500px;
+        }
+      }
+    }
+  }
+
+  .table-controls {
+    display: flex;
+    flex-wrap: wrap;
+
+    mat-form-field {
+      margin: 0 16px;
+      width: 300px;
+
+      .search-icon {
+        margin: 0 6px 6px 0;
+      }
+
+      ::ng-deep .search-icon svg,
+      ::ng-deep .clear-icon svg {
+        fill: #6e6e6e;
+      }
+    }
+  }
+
+  table {
+    background-color: white;
+    font-size: 18px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+    table-layout: fixed;
+
+    td {
+      padding: 0;
+    }
+
+    thead {
+      .name-column {
+        border-right: 1px solid green;
+        left: 0;
+        z-index: 20;
+      }
+
+      .column {
+        width: 110px;
+      }
+
+      th {
+        font: inherit;
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid coral;
+        padding: 0;
+
+        input {
+          border: none;
+          font: inherit;
+          color: inherit;
+          outline: none;
+          background: inherit;
+          width: 110px;
+          padding: 15px 5px;
+          margin: 0;
+          text-align: center;
+        }
+
+        .pointer {
+          cursor: pointer;
+        }
+
+        &:nth-child(n+3) {
+          border-left: 1px solid blue;
+        }
+
+        &.static-header {
+          position: sticky;
+          right: 0;
+          top: 0;
+          background: white;
+          border-left: 1px solid deeppink;
+
+          button {
+            transition: background 0.25s;
+          }
+
+          button:hover {
+            background: #f2f2f2;
+          }
+
+          input {
+            visibility: hidden;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background: white;
+        &:nth-child(odd) {
+          background: #fcfcff;
+        }
+
+        .student-name {
+          padding: 10px 10px;
+          left: 0;
+          z-index: 10;
+          border-right: 1px solid green;
+          position: sticky;
+          background: inherit;
+          white-space: nowrap;
+        }
+
+        .mark > input {
+          border: none;
+          font: inherit;
+          color: inherit;
+          outline: none;
+          background: inherit;
+          width: 110px;
+          padding: 10px 5px;
+          text-align: center;
+        }
+
+        .mark:nth-child(n+3) {
+          border-left: 1px solid blue;
+        }
+
+        &:nth-last-child(n+2)>td {
+          border-bottom: 1px solid #DDD;
+        }
+
+        .static-cell {
+          position: sticky;
+          right: 0;
+          background: inherit;
+          border-left: 1px solid deeppink;
+        }
+
+        &:hover {
+          background-color: #f7f7f7;
+        }
+      }
+    }
+  }
+}

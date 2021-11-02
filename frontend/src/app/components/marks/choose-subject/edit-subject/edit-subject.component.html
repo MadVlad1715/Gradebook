@@ -1,0 +1,41 @@
+<div class="dialog">
+
+  <div class="header">
+    <h2 mat-dialog-title>Редагування предмету</h2>
+    <mat-error *ngIf="error">Виникла помилка</mat-error>
+  </div>
+
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="standard" class="full-width-input">
+        <input matInput type="text" placeholder="Назва" formControlName="name" required minlength="2" maxlength="100" #name>
+        <mat-icon matSuffix svgIcon="label"></mat-icon>
+        <mat-error *ngIf="form.controls['name'].errors?.required">Дане поле є обов'язковим</mat-error>
+        <mat-error *ngIf="form.controls['name'].errors?.minlength">Назва занадто коротка</mat-error>
+        <mat-error *ngIf="form.controls['name'].errors?.subjectAlreadyExists">Предмет з такою назвою вже існує</mat-error>
+        <mat-error *ngIf="!form.controls['name'].errors?.minlength && form.controls['name'].errors?.forbiddenName">Недопустиме ім'я</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="full-width-input">
+        <input matInput type="text" placeholder="Викладач (не обов'язково)" [matAutocomplete]="auto" formControlName="teacher" maxlength="41">
+        <mat-icon matSuffix svgIcon="teacher"></mat-icon>
+        <mat-error *ngIf="form.controls['teacher'].errors?.unknownTeacherName">Невідомий викладач</mat-error>
+
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button [mat-dialog-close]="undefined" [disabled]="requesting">Назад</button>
+    <button mat-stroked-button color="primary" (click)="onSubmit()" [disabled]="form.invalid || requesting || !inited">Зберегти</button>
+  </mat-dialog-actions>
+
+  <mat-progress-bar class="progress" [ngStyle]="{visibility: requesting || !inited? 'visible' : 'hidden'}" mode="indeterminate"></mat-progress-bar>
+</div>

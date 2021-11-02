@@ -1,0 +1,65 @@
+<div class="center-wrapper">
+  <div class="wrapper">
+
+    <div class="data-table-header">
+      <mat-form-field>
+        <mat-label>Фільтр</mat-label>
+        <input matInput type="text" [(ngModel)]="filterValue" (input)="applyFilter()" (keydown.escape)="filterValue=''; applyFilter()" [disabled]="!students.data.length" maxlength="41" #input>
+        <mat-icon class="search-icon" matPrefix svgIcon="search"></mat-icon>
+        <button mat-button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue=''; applyFilter()">
+          <mat-icon svgIcon="clear"></mat-icon>
+        </button>
+      </mat-form-field>
+      <button class="create" mat-stroked-button color="primary" (click)="createStudent()">
+        Додати студента
+      </button>
+    </div>
+
+    <div class="data-table mat-elevation-z8">
+      <table mat-table [dataSource]="students" matSort>
+
+        <ng-container matColumnDef="login">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Логін</th>
+          <td mat-cell *matCellDef="let student">{{student.login}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ім'я</th>
+          <td mat-cell *matCellDef="let student">{{student.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Група</th>
+          <td mat-cell *matCellDef="let student">{{student.groupName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="creationTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата створення</th>
+          <td mat-cell *matCellDef="let student">{{student.creationTime}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th class="actions-header" mat-header-cell *matHeaderCellDef></th>
+          <td class="actions-data" mat-cell *matCellDef="let student">
+            <button class="edit-btn" mat-icon-button color="primary" (click)="editStudent(student)">
+              <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+            <button class="delete-btn" mat-icon-button color="warn" (click)="deleteStudent(student)">
+              <mat-icon svgIcon="delete"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td *ngIf="students.data.length && input.value" class="mat-cell" colspan="5">Не знайдено збігів за фільтром "{{input.value}}"</td>
+          <td *ngIf="!students.data.length" class="mat-cell" colspan="5">На данний момент не зареєстровано жодного студента</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,186 @@
+@import '~@angular/material/theming';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #F0F0F0;
+  font-size: 50px;
+}
+
+mat-form-field {
+  font-size: 16px !important;
+  line-height: normal !important;
+}
+
+button {
+  font-size: 16px !important;
+  line-height: 36px !important;
+}
+
+.wrapper {
+  margin: 0 auto;
+}
+
+.center-wrapper {
+  display: flex;
+  margin: 0 50px;
+}
+
+.content-wrapper {
+  display: flex;
+  padding: 0 25px;
+
+  .content {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.data-table-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+
+  mat-form-field {
+    width: 380px;
+
+    .search-icon {
+      margin-right: 6px;
+
+      svg {
+        fill: #6e6e6e;
+      }
+    }
+  }
+
+  .create {
+    align-self: center;
+  }
+}
+
+.data-table {
+  width: 100%;
+
+  table {
+    width: 100%;
+
+    th {
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .actions-header {
+      text-align: right;
+      cursor: default;
+    }
+
+    .actions-data {
+      text-align: right;
+    }
+
+    td {
+      font-size: 16px;
+      font-weight: 400;
+
+      .edit-btn, .delete-btn {
+        transition: background 0.25s;
+      }
+
+      .edit-btn:hover {
+        background: mat-color(mat-palette($mat-indigo), 0.1);
+      }
+
+      .delete-btn:hover {
+        background: mat-color(mat-palette($mat-red), 0.1);
+      }
+
+      .edit-btn svg {
+        fill: mat-color(mat-palette($mat-indigo));
+      }
+      .delete-btn svg {
+        fill: mat-color(mat-palette($mat-red));
+      }
+    }
+  }
+
+  .mat-row:hover {
+    background-color: #F8F8F8;
+  }
+}
+
+.dialog {
+  width: 100%;
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+
+    h2 {
+      margin-bottom: 0;
+      font-size: 22px;
+    }
+
+    mat-error, .success {
+      font-size: 16px;
+    }
+  }
+
+  form {
+    mat-form-field {
+      display: block;
+
+      .input-group {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .warning {
+    color: red;
+  }
+
+  .accent {
+    font-weight: 500;
+  }
+
+  .success {
+    color: #26a91d;
+  }
+
+  .progress {
+    position: relative;
+    bottom: -24px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+}
+
+.mat-icon-button .mat-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-form-field-flex > .mat-form-field-prefix,
+.mat-form-field-flex > .mat-form-field-suffix{
+  align-self: flex-end;
+
+  mat-icon {
+    margin-bottom: 6px;
+  }
+}

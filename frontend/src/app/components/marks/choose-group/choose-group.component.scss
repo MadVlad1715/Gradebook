@@ -1,0 +1,35 @@
+.choose-groups-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 400px);
+  padding: 0 25px;
+  grid-gap: 25px;
+  justify-content: center;
+}
+
+.no-groups {
+  text-align: center;
+  font-size: 24px;
+}
+
+mat-card {
+  width: 400px;
+  transition: 0.25s ease;
+  transition-property: transform, box-shadow;
+  cursor: pointer;
+
+  mat-card-header {
+    justify-content: center;
+
+    mat-card-title {
+      font-size: 24px;
+    }
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+.card-hover {
+  transform: translateY(-10px);
+}

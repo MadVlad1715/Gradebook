@@ -1,0 +1,41 @@
+<div>
+
+  <div *ngIf="group" class="info">
+    <p class="group">{{group.name}}</p>
+    <p class="teacher">Класний керівник: {{group.classroomTeacherName}}</p>
+    <p *ngIf="!subjects.length" class="no-subjects">На даний момент група не має предметів</p>
+  </div>
+
+  <div class="choose-subject-wrapper">
+    <mat-card class="subject"
+              *ngFor="let subject of subjects"
+              [appHover]="['mat-elevation-z16', 'card-hover']"
+              (click)="onClick(subject)">
+      <mat-card-header>
+        <mat-card-title>{{subject.name}}</mat-card-title>
+          <div class="options" *ngIf="auth.isAdmin || auth.isTeacher">
+            <button mat-icon-button aria-label="Edit" (click)="edit(subject, $event)">
+              <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Delete" (click)="delete(subject, $event)">
+              <mat-icon svgIcon="delete"></mat-icon>
+            </button>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="subject.teacherName">Викладач: {{subject.teacherName}}</p>
+        <p>Дата створення: {{subject.creationTime * 1000 | date:'dd.MM.YYYY HH:mm'}}</p>
+        <p *ngIf="subject.lastEditTime">Дата останнього редагування: {{subject.lastEditTime * 1000 | date:'dd.MM.YYYY HH:mm'}}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="add-group" *ngIf="auth.isAdmin || auth.isTeacher"
+              [appHover]="['mat-elevation-z16', 'card-hover']"
+              (click)="createSubject()">
+      <mat-card-header>
+        <mat-card-title>Створити предмет</mat-card-title>
+        <mat-icon svgIcon="add"></mat-icon>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+</div>

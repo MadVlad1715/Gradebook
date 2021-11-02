@@ -1,0 +1,13 @@
+<div class="dialog">
+  <h2 mat-dialog-title>Вихід</h2>
+  <mat-dialog-content class="mat-typography">
+    <p>Ви впевнені, що хочете вийти?</p>
+    <div class="checkbox-wrapper">
+      <mat-checkbox [(ngModel)]="result.logoutFromAll">Вийти з усіх пристроїв</mat-checkbox>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="undefined">Назад</button>
+    <button mat-button [mat-dialog-close]="result" cdkFocusInitial>Вихід</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,30 @@
+<mat-card class="auth-form">
+
+  <mat-card-content>
+    <mat-card-header>
+      <mat-card-title>Вхід у систему</mat-card-title>
+      <mat-error [ngStyle]="{visibility: authError ? 'visible' : 'hidden'}">{{authErrorMsg}}</mat-error>
+    </mat-card-header>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="standard" class="full-width-input">
+        <input class="login" matInput placeholder="Логін" formControlName="login" autofocus required maxlength="20">
+        <mat-icon matSuffix svgIcon="login"></mat-icon>
+        <mat-error>Дане поле є обов'язковим</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="full-width-input">
+        <input class="password" matInput type="password" placeholder="Пароль" formControlName="password" required maxlength="50">
+        <mat-icon matSuffix svgIcon="password"></mat-icon>
+        <mat-error>Дане поле є обов'язковим</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary">Вхід</button>
+    </form>
+
+  </mat-card-content>
+
+  <mat-progress-bar [ngStyle]="{visibility: inProcess? 'visible' : 'hidden'}" mode="indeterminate"></mat-progress-bar>
+
+</mat-card>
